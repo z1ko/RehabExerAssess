@@ -20,7 +20,8 @@ def setup_experiment(args):
     model_prefix = {
         'gcn': 'GCN',
         'ri-gcn': 'RIGCN',
-        'va-gcn': 'VAGCN'
+        'va-gcn': 'VAGCN',
+        'sgn': 'SGN'
     }[args.model]
     preproc_prefix = 'Pnorm' if args.Pnorm else 'none'
     seed_prefix = 'seed{}'.format(args.seed)

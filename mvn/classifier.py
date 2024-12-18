@@ -80,8 +80,8 @@ class RotationInvariantGCNClassifier(nn.Module):
         self.fcn = nn.Conv2d(256, num_classes, kernel_size=1)
 
     def forward(self, keypoints_3d):
-        x = torch.einsum('ijkm,ijml->ijkl', keypoints_3d,
-                         keypoints_3d.permute(0, 1, 3, 2))
+        x_perm = keypoints_3d.permute(0, 1, 3, 2)
+        x = torch.einsum('ijkm,ijml->ijkl', keypoints_3d, x_perm)
         N, T, V, C = x.size()
         x = x.permute(0, 2, 3, 1).contiguous()
         x = x.view(N, V * C, T)

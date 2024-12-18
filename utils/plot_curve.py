@@ -2,28 +2,21 @@ import os
 import matplotlib.pyplot as plt
 
 
-def plot_train_curve(losses_epoch, accuracy_epoch, recall_epoch,
-                     precision_epoch, fig_dir):
+def plot_train_curve(movement,losses_epoch_train, losses_epoch_val, fig_dir):
     plt.figure(figsize=[15, 12], dpi=200)
 
-    plt.subplot(2, 2, 1)
-    plt.plot(losses_epoch)
-    plt.title('Loss')
+    plt.subplot(1,2,1)
+    plt.title(f'Loss {movement}')
+    plt.plot(losses_epoch_train, 'b', label='Train loss')
+    plt.plot(losses_epoch_val,'g', label='Val loss')
+    plt.legend()
 
-    plt.subplot(2, 2, 2)
-    plt.plot(accuracy_epoch)
-    plt.title('Accuracy')
-    plt.ylim([0, 1])
-
-    plt.subplot(2, 2, 3)
-    plt.plot(recall_epoch)
-    plt.title('Recall')
-    plt.ylim([0, 1])
-
-    plt.subplot(2, 2, 4)
-    plt.plot(precision_epoch)
-    plt.title('Precision')
-    plt.ylim([0, 1])
+    plt.subplot(1,2,2)
+    plt.title(f'Loss {movement} detail')
+    plt.plot(losses_epoch_train, 'b', label='Train loss')
+    plt.plot(losses_epoch_val,'g', label='Val loss')
+    plt.ylim([0,20])
+    plt.legend()
 
     plt.savefig(os.path.join(fig_dir, 'train_curve.jpg'))
 

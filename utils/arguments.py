@@ -3,7 +3,10 @@ import argparse
 
 def get_args():
     parser = argparse.ArgumentParser()
-
+    parser.set_defaults(
+        window_size=200,
+        window_delta=50
+    )
     # experiment
     parser.add_argument('--root',
                         type=str,
@@ -19,7 +22,8 @@ def get_args():
     parser.add_argument(
         '--dataset',
         type=str,
-        choices=['IRDS', 'UIPRMD_Kinect', 'UIPRMD_Vicon', 'PushUp'],
+        choices=['IRDS', 'UIPRMD_Kinect', 'UIPRMD_Vicon', 'PushUp', 'kimore'],
+        default='kimore',
         help='dataset type')
     parser.add_argument('--Pnorm',
                         action='store_true',
@@ -33,8 +37,8 @@ def get_args():
     # classification model
     parser.add_argument('--model',
                         type=str,
-                        default='ri-gcn',
-                        choices=['gcn', 'ri-gcn', 'va-gcn'],
+                        default='sgn',
+                        choices=['gcn', 'ri-gcn', 'va-gcn', 'sgn'],
                         help='type of model to be used')
     parser.add_argument('--strategy',
                         type=str,
@@ -45,11 +49,11 @@ def get_args():
     # training hyper parameters
     parser.add_argument('--epoch',
                         type=int,
-                        default=100,
+                        default=2,
                         help='epochs to train')
     parser.add_argument('--batch_size',
                         type=int,
-                        default=64,
+                        default=10,
                         help='batch size of data')
     parser.add_argument('--lr', type=float, default=1e-4, help='learning rate')
 
